@@ -8,7 +8,7 @@ class PokemonFavScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final List<Pokemon> favouritePokemons = ref.read(pokemonNotifierProvider);
+    final List<Pokemon> favouritePokemons = ref.watch(pokemonNotifierProvider);
 
     return ListView.builder(
       itemBuilder: (context, index) {

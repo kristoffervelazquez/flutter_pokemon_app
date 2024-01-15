@@ -15,31 +15,31 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Pokemons'),
-        actions: [
-          IconButton(onPressed: () {}, icon: const Icon(Icons.settings))
-        ],
-      ),
-      bottomNavigationBar: NavigationBar(
-
-        selectedIndex: currentPage,
-        onDestinationSelected: (value) {
-          currentPage = value;
-          setState(() {});
-        },
-        destinations: const <Widget>[
-          NavigationDestination(icon: Icon(Icons.abc), label: 'Pokemons'),
-          NavigationDestination(icon: Icon(Icons.star), label: 'Favourites'),
-        ],
-      ),
-      body: <Widget>[
-        // Pokemons
-        const PokemonsScreen(),
-        // Favs
-        const PokemonFavScreen()
-      ][currentPage],
-      
-    );
+        appBar: AppBar(
+          title: const Text('Pokemons'),
+          actions: [
+            IconButton(onPressed: () {}, icon: const Icon(Icons.settings))
+          ],
+        ),
+        bottomNavigationBar: NavigationBar(
+          selectedIndex: currentPage,
+          onDestinationSelected: (value) {
+            currentPage = value;
+            setState(() {});
+          },
+          destinations: const <Widget>[
+            NavigationDestination(icon: Icon(Icons.abc), label: 'Pokemons'),
+            NavigationDestination(icon: Icon(Icons.star), label: 'Favourites'),
+          ],
+        ),
+        body: IndexedStack(
+          index: currentPage,
+          children: const <Widget>[
+            // Pokemons
+            PokemonsScreen(),
+            // Favs
+            PokemonFavScreen()
+          ],
+        ));
   }
 }
