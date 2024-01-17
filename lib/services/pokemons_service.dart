@@ -8,7 +8,7 @@ class PokemonService {
 
   Future<List<Pokemon>> getPokemons(int limit, int page) async {
     final int offset = limit * page;
-    print(offset);
+
     final response = await http.get(Uri.parse('$baseUrl/pokemon?limit=$limit&offset=$offset'));
 
     if (response.statusCode == 200) {

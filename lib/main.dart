@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:poekapi_app/config/theme_config.dart';
-import 'package:poekapi_app/presentation/screens/home_screen.dart';
+import 'package:poekapi_app/presentation/screens/screens.dart';
+
 
 void main() {
   runApp(const ProviderScope(child: MyApp()));

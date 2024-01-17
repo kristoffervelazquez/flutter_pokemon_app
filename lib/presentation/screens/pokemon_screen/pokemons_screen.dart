@@ -13,7 +13,7 @@ class PokemonsScreen extends StatefulWidget {
 
 class _PokemonsScreenState extends State<PokemonsScreen> {
   final PokemonService pokemonService = PokemonService();
-  late List<Pokemon> pokemons = [];
+  late List<Pokemon> pokemons;
   bool isLoading = false;
   int page = 0;
   // ignore: constant_identifier_names

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:poekapi_app/presentation/screens/pokemons_fav_screen.dart';
-import 'package:poekapi_app/presentation/screens/pokemons_screen.dart';
+import 'package:poekapi_app/presentation/screens/screens.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
