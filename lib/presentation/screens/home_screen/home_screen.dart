@@ -20,6 +20,9 @@ class _HomeScreenState extends State<HomeScreen> {
             IconButton(onPressed: () {}, icon: const Icon(Icons.settings))
           ],
         ),
+        drawer: const Drawer(
+          child: PokemonFavScreen(),
+        ),
         bottomNavigationBar: NavigationBar(
           selectedIndex: currentPage,
           onDestinationSelected: (value) {

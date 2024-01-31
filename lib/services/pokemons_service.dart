@@ -24,8 +24,8 @@ class PokemonService {
     }
   }
 
-  Future<PokemonDetails> getPokemonDetails(String pokemonUrl) async {
-    final response = await http.get(Uri.parse(pokemonUrl));
+  Future<PokemonDetails> getPokemonDetails(String pokemonId) async {
+    final response = await http.get(Uri.parse('$baseUrl/pokemon/$pokemonId'));
 
     if (response.statusCode == 200) {
       final Map<String, dynamic> data = json.decode(response.body);

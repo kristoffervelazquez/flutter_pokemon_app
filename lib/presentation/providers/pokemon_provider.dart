@@ -5,8 +5,13 @@ class PokemonNotifier extends StateNotifier<List<Pokemon>> {
   PokemonNotifier() : super([]);
 
   void addPokemonToFavourite(Pokemon pokemon) {
-    if (state.contains(pokemon)) return;
+    if(state.where((element) => element.getId() == pokemon.getId()).isNotEmpty) return;
     state = [...state, pokemon];
+  }
+
+  void removePokemonFromFavourite(Pokemon pokemon) {
+    final filteredList = state.where((e) =>  e != pokemon).toList();
+    state = filteredList;
   }
 }
 

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:poekapi_app/models/pokemon.dart';
 import 'package:poekapi_app/presentation/providers/pokemon_provider.dart';
 import 'package:poekapi_app/services/pokemons_service.dart';
@@ -36,9 +37,9 @@ class _PokemonsScreenState extends State<PokemonsScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             FloatingActionButton(
+              heroTag: 1,
               onPressed: () {
                 if (page <= 0) return;
-
                 page--;
                 fetchPokemons(LIMIT_PER_PAGE, page);
               },
@@ -47,6 +48,7 @@ class _PokemonsScreenState extends State<PokemonsScreen> {
             ),
             const SizedBox(width: 10),
             FloatingActionButton(
+              heroTag: 2,
               onPressed: () {
                 page++;
                 fetchPokemons(LIMIT_PER_PAGE, page);
@@ -95,7 +97,6 @@ class _PokemonsView extends StatelessWidget {
       mainAxisSpacing: 10,
       crossAxisCount: 2,
       children: <Widget>[
-        
         ...pokemons.map((e) => _PokemonDetailsItem(pokemon: e))
       ],
     );
@@ -126,17 +127,16 @@ class _PokemonDetailsItemState extends ConsumerState<_PokemonDetailsItem> {
   Widget build(BuildContext context) {
     final id = widget.pokemon.getId();
     final colors = Theme.of(context).colorScheme;
+    final pokemonId = widget.pokemon.getId();
+
+    final bool isPokemonFavourite = ref.watch(pokemonNotifierProvider).where((element) => element.getId() == pokemonId).isNotEmpty;
 
     return ClipRRect(
       borderRadius: BorderRadius.circular(16),
       child: Material(
         color: colors.primary,
         child: InkWell(
-          onTap: () {
-            ref
-                .read(pokemonNotifierProvider.notifier)
-                .addPokemonToFavourite(widget.pokemon);
-          },
+          onTap: () => context.push('/pokemon/$pokemonId'),
           child: Column(
             children: [
               Image.network(
@@ -144,6 +144,16 @@ class _PokemonDetailsItemState extends ConsumerState<_PokemonDetailsItem> {
               Text(
                 widget.pokemon.name.toUpperCase(),
                 style: const TextStyle(color: Colors.white),
+              ),
+              IconButton(
+                onPressed: () {
+                  // ref
+                  //     .read(pokemonNotifierProvider.notifier)
+                  //     .addPokemonToFavourite(widget.pokemon);
+                },
+                icon: Icon(isPokemonFavourite
+                    ? Icons.favorite
+                    : Icons.favorite_border),
               )
             ],
           ),
